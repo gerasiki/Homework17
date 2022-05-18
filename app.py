@@ -17,6 +17,7 @@ movies_ns = api.namespace('movies')
 director_ns = api.namespace('directors')
 genre_ns = api.namespace('genres')
 
+
 class Movie(db.Model):
     __tablename__ = 'movie'
     id = db.Column(db.Integer, primary_key=True)
@@ -44,8 +45,10 @@ class MoviesSchema(Schema):
     genre_id = fields.Int()
     director_id = fields.Int()
 
+    
 movies_schema = MoviesSchema(many=True)
 movie_schema = MoviesSchema()
+
 
 class Director(db.Model):
     __tablename__ = 'director'
@@ -57,20 +60,25 @@ class DirectorSchema(Schema):
     id = fields.Int()
     name = fields.Str()
 
+    
 directors_schema = DirectorSchema(many=True)
 director_schema = DirectorSchema()
+
 
 class Genre(db.Model):
     __tablename__ = 'genre'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
 
+    
 class GenreSchema(Schema):
     id = fields.Int()
     name = fields.Str()
 
+    
 genres_schema = GenreSchema(many=True)
 genre_schema = GenreSchema()
+
 
 @movies_ns.route('/')
 class MovieView(Resource):
@@ -144,6 +152,7 @@ class DirectorsView(Resource):
 
         return "", 201
 
+    
 @director_ns.route('/<int:mid>')
 class DirectorView(Resource):
     def get(self, mid):
@@ -185,6 +194,7 @@ class GenresView(Resource):
 
         return "", 201
 
+    
 @genre_ns.route('/<int:mid>')
 class GenreView(Resource):
     def get(self, mid):
